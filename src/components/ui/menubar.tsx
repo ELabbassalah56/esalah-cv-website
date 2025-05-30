@@ -6,15 +6,22 @@ import { Check, ChevronRight, Circle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-const MenubarMenu = MenubarPrimitive.Menu
+// Add explicit type annotation for MenubarMenu
+type MenubarMenuType = typeof MenubarPrimitive.Menu
+const MenubarMenu: MenubarMenuType = MenubarPrimitive.Menu
 
-const MenubarGroup = MenubarPrimitive.Group
+// Add explicit type annotations for other primitive components
+type MenubarGroupType = typeof MenubarPrimitive.Group
+const MenubarGroup: MenubarGroupType = MenubarPrimitive.Group
 
-const MenubarPortal = MenubarPrimitive.Portal
+type MenubarPortalType = typeof MenubarPrimitive.Portal
+const MenubarPortal: MenubarPortalType = MenubarPrimitive.Portal
 
-const MenubarSub = MenubarPrimitive.Sub
+type MenubarSubType = typeof MenubarPrimitive.Sub
+const MenubarSub: MenubarSubType = MenubarPrimitive.Sub
 
-const MenubarRadioGroup = MenubarPrimitive.RadioGroup
+type MenubarRadioGroupType = typeof MenubarPrimitive.RadioGroup
+const MenubarRadioGroup: MenubarRadioGroupType = MenubarPrimitive.RadioGroup
 
 const Menubar = React.forwardRef<
   React.ElementRef<typeof MenubarPrimitive.Root>,
@@ -214,7 +221,7 @@ const MenubarShortcut = ({
     />
   )
 }
-MenubarShortcut.displayname = "MenubarShortcut"
+MenubarShortcut.displayName = "MenubarShortcut" // Fixed: displayname -> displayName
 
 export {
   Menubar,

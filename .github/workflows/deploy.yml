@@ -1,0 +1,52 @@
+name: Deploy to Github Pages
+
+on:
+    push:
+        branches: [ main ]
+    workflow_dispatch: 
+
+# Add permissions section
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+              with:
+                persist-credentials: true # Add this line
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '20'
+
+            - name: Install pnpm
+              uses: pnpm/action-setup@v2
+              with:
+                  version: 8
+            
+            - name: Install dependencies
+              run: pnpm install
+
+            - name: Build
+              run: pnpm run build
+
+            # Add Git configuration
+            - name: Setup Git
+              run: |
+                git config --global user.name "ELabbassalah56"
+                git config --global user.email "https://github.com/ELabbassalah56"
+
+            - name: Deploy
+              uses: JamesIves/github-pages-deploy-action@v4
+              with:
+                  folder: dist
+                  clean: true
+                  repository-name: ELabbassalah56/elabbassalah56.github.io
+                  branch: main  # or whatever branch you want to deploy to
+                  token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}  # Add this token to your repository secrets
+                  
